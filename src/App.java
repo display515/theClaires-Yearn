@@ -10,10 +10,11 @@ import javafx.scene.control.Button;
 public class App extends Application {
 
     Button yearnButton;
+    StackPane yearnStack;
 
     @Override
     public void start(Stage yearnStageInterface) throws Exception {
-        StackPane yearnStack = new StackPane();
+        yearnStack = new StackPane();
         Scene yearnScene = new Scene(yearnStack, 440, 440);
         
         yearnStageInterface.setTitle("Yearn");
