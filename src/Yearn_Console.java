@@ -1,4 +1,5 @@
 import java.sql.SQLException;
+import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
@@ -9,17 +10,16 @@ import java.util.Scanner;
 public class Yearn_Console{
 
         private static final Scanner insertUserInput = new Scanner(System.in);
+        private static final String url = "jdbc:sqlite:D:\\SCHOOL RELATED\\CS2101_AguantaKC_OOP101_Activities\\OOP FINAL PROJECT DATABASE\\theClaires-Yearn\\data\\crafts.db";
 
-        static void testConnection(){
-            String url = "jdbc:sqlite:D:\\SCHOOL RELATED\\CS2101_AguantaKC_OOP101_Activities\\OOP FINAL PROJECT DATABASE\\theClaires-Yearn\\data";
+        static void testConnection(){ //it's working do NOT change this
 
             try (Connection conn = DriverManager.getConnection(url)) {
-                System.out.println("Connection to SQLite has been established.");
+                System.out.println("Welcome to Yearn Console!"); // we are keeping this to know if the db is connected or not
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }
         }
-
 
         private static class consoleYearn {
             private final LinkedHashMap<Integer, String> consoleYearn;
@@ -30,15 +30,20 @@ public class Yearn_Console{
                 consoleYearn.put(2, "Available Crafts");
                 consoleYearn.put(3, "Current Projects");
                 consoleYearn.put(4, "Exit");
+            }
         }
         public static void main(String[] args) {
             Boolean statementIsTrue = true;
+
+            testConnection();
+
             while (statementIsTrue){
                 System.out.println("~~~~ \t Yearn Console \t ~~~~");
                 Integer callIntegerMethod = printObject();
                 statementIsTrue = callIntegerMethod != 4;
 
-                testConnection();
+                showUserInventory();
+
 
             }
             insertUserInput.close();
@@ -54,7 +59,6 @@ public class Yearn_Console{
             System.out.printf("\n" + userReturnInput(inputUser) + "\t\n");
             return inputUser;
         }
-
         
         static Integer userInput(Scanner insertUserInput){
             Integer chooseConsole;
@@ -86,5 +90,25 @@ public class Yearn_Console{
             
             return returnToConsole;
         }
-    }
+
+        static void showUserInventory(){
+            String sql = "SELECT * FROM user_inventory";
+
+            try (Connection conn = DriverManager.getConnection(url);
+                 Statement stmt = conn.createStatement();
+                 var rs = stmt.executeQuery(sql)) {
+
+                System.out.println("Inventory:");
+                while (rs.next()) {
+                    System.out.println(rs.getInt("user_id") + "\t" +
+                                       rs.getString("item_name") + "\t" +
+                                       rs.getInt("inventory_type")+ "\t" +
+                                       rs.getInt("grams")+ "\t");
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+
 }
