@@ -1,3 +1,4 @@
+import java.sql.SQLException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
@@ -8,7 +9,18 @@ import java.util.Scanner;
 public class Yearn_Console{
 
         private static final Scanner insertUserInput = new Scanner(System.in);
-        
+
+        static void testConnection(){
+            String url = "jdbc:sqlite:D:\\SCHOOL RELATED\\CS2101_AguantaKC_OOP101_Activities\\OOP FINAL PROJECT DATABASE\\theClaires-Yearn\\data";
+
+            try (Connection conn = DriverManager.getConnection(url)) {
+                System.out.println("Connection to SQLite has been established.");
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+
         private static class consoleYearn {
             private final LinkedHashMap<Integer, String> consoleYearn;
 
@@ -25,6 +37,9 @@ public class Yearn_Console{
                 System.out.println("~~~~ \t Yearn Console \t ~~~~");
                 Integer callIntegerMethod = printObject();
                 statementIsTrue = callIntegerMethod != 4;
+
+                testConnection();
+
             }
             insertUserInput.close();
         }
