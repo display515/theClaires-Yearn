@@ -1,12 +1,9 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
 import java.util.InputMismatchException;
 import java.util.LinkedHashMap;
 import java.util.Scanner;
 
 public class Yearn_Console{
-    private static final Scanner insertUserInput = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
     private static class consoleYearn {
         private final LinkedHashMap<Integer, String> consoleYearn;
 
@@ -16,15 +13,15 @@ public class Yearn_Console{
             consoleYearn.put(2, "Available Crafts");
             consoleYearn.put(3, "Current Projects");
             consoleYearn.put(4, "Exit");
+        }
     }
     public static void main(String[] args) {
-        Boolean statementIsTrue = true;
-        while (statementIsTrue){
+        int callIntegerMethod;
+        do{
             System.out.println("~~~~ \t Yearn Console \t ~~~~");
-            Integer callIntegerMethod = printObject();
-            statementIsTrue = callIntegerMethod != 4;
-        }
-        insertUserInput.close();
+            callIntegerMethod = printObject();
+        }while(callIntegerMethod != 4);
+        scanner.close();
     }
 
     static Integer printObject(){
@@ -33,17 +30,17 @@ public class Yearn_Console{
         System.out.println("3. Current Projects");
         System.out.println("4. Exit\n");
         System.out.print("Choose Action: ");
-        Integer inputUser = userInput(insertUserInput);
+        Integer inputUser = userInput(scanner);
         System.out.printf("\n" + userReturnInput(inputUser) + "\t\n");
         return inputUser;
     }
 
     
-    static Integer userInput(Scanner insertUserInput){
+    static Integer userInput(Scanner scanner){
         Integer chooseConsole;
         while(true){
             try{
-                chooseConsole = insertUserInput.nextInt();
+                chooseConsole = scanner.nextInt();
                     if(chooseConsole < 5 && chooseConsole > 0){
                         break;
                     }else{
@@ -51,7 +48,7 @@ public class Yearn_Console{
                     }
                 }catch(InputMismatchException e){
                         System.out.println("Invalid Input. Please input only numbers between 1-4 and try again.");
-                        insertUserInput.nextLine();        
+                        scanner.nextLine();        
             }
         }return chooseConsole;
     }
