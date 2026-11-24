@@ -6,6 +6,7 @@ import java.sql.Statement;
 import java.util.InputMismatchException;
 import java.util.LinkedHashMap;
 import java.util.Scanner;
+import java.util.List;
 
 public class Yearn_Console{
 
@@ -41,8 +42,6 @@ public class Yearn_Console{
                 System.out.println("~~~~ \t Yearn Console \t ~~~~");
                 Integer callIntegerMethod = printObject();
                 statementIsTrue = callIntegerMethod != 4;
-
-                showUserInventory();
 
 
             }
@@ -91,24 +90,8 @@ public class Yearn_Console{
             return returnToConsole;
         }
 
-        static void showUserInventory(){
-            String sql = "SELECT * FROM user_inventory";
-
-            try (Connection conn = DriverManager.getConnection(url);
-                 Statement stmt = conn.createStatement();
-                 var rs = stmt.executeQuery(sql)) {
-
-                System.out.println("Inventory:");
-                while (rs.next()) {
-                    System.out.println(rs.getInt("user_id") + "\t" +
-                                       rs.getString("item_name") + "\t" +
-                                       rs.getInt("inventory_type")+ "\t" +
-                                       rs.getInt("grams")+ "\t");
-                }
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-
 
 }
+
+
+

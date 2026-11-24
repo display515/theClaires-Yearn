@@ -18,6 +18,21 @@ public abstract class Material {
         this.grams = grams;
     }
 
+    public class yarn_projects {
+    private int id;
+    private int userId;
+    private String name;
+    private String description;
+    private int status;
+
+    public Project(int id, int userId, String name, String description, int status) {
+        /* ___ assign each parameter to its field using this.field = parameter ___ */
+    }
+
+    /* ___ one getter per field: getId(), getUserId(), getName(), getDescription(), getStatus() ___ */
+}
+
+
     public abstract String getType();
 
     @Override
