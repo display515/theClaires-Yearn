@@ -1,26 +1,23 @@
-import java.sql.SQLException;
-import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.Statement;
+import java.sql.SQLException;
 import java.util.InputMismatchException;
 import java.util.LinkedHashMap;
 import java.util.Scanner;
-import java.util.List;
 
 public class Yearn_Console{
 
-        private static final Scanner insertUserInput = new Scanner(System.in);
-        private static final String url = "jdbc:sqlite:D:\\SCHOOL RELATED\\CS2101_AguantaKC_OOP101_Activities\\OOP FINAL PROJECT DATABASE\\theClaires-Yearn\\data\\crafts.db";
+    private static final Scanner insertUserInput = new Scanner(System.in);
+    private static final String url = "jdbc:sqlite:D:\\SCHOOL RELATED\\CS2101_AguantaKC_OOP101_Activities\\OOP FINAL PROJECT DATABASE\\theClaires-Yearn\\data\\crafts.db";
 
-        static void testConnection(){ //it's working do NOT change this
+    static void testConnection(){ //it's working do NOT change this
 
-            try (Connection conn = DriverManager.getConnection(url)) {
-                System.out.println("Welcome to Yearn Console!"); // we are keeping this to know if the db is connected or not
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
+        try (Connection conn = DriverManager.getConnection(url)) {
+            System.out.println("Welcome to Yearn Console!"); // we are keeping this to know if the db is connected or not
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
+    }
 
         private static class consoleYearn {
             private final LinkedHashMap<Integer, String> consoleYearn;
@@ -33,6 +30,7 @@ public class Yearn_Console{
                 consoleYearn.put(4, "Exit");
             }
         }
+
         public static void main(String[] args) {
             Boolean statementIsTrue = true;
 
@@ -89,8 +87,6 @@ public class Yearn_Console{
             
             return returnToConsole;
         }
-
-
 }
 
 

@@ -5,6 +5,12 @@ public abstract class Material {
     private int grams;
 
     public Material(int id, String name, String color, int grams){
+        if (name == null || name.isBlank()){
+            throw new IllegalArgumentException("Name cannot be empty.");
+        }
+        if (color == null || color.isBlank()) {
+            throw new IllegalArgumentException("Color cannt be empty.");
+        }
         this.id = id;
         this.name = name;
         this.color = color;
@@ -18,20 +24,29 @@ public abstract class Material {
         this.grams = grams;
     }
 
-    public class yarn_projects {
-    private int id;
-    private int userId;
-    private String name;
-    private String description;
-    private int status;
+    public void add(int amount) {
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Amount can't be less than or equal to 0");
+        }
 
-    public Project(int id, int userId, String name, String description, int status) {
-        /* ___ assign each parameter to its field using this.field = parameter ___ */
+        grams += amount;
     }
 
-    /* ___ one getter per field: getId(), getUserId(), getName(), getDescription(), getStatus() ___ */
-}
+    public void use(int amount) throws InsufficientMaterialException {
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Amount can't be less than or equal to 0.");
+        }
+        if (amount > grams) {
+            throw new InsufficientMaterialException(
+                "Not enough " + color + " " + name + ": need " + amount + "g but only " + grams + "g left.");
+        }
+        grams -= amount;
+    }
 
+    public int getId()         {return id;}
+    public String getName()    {return name;}
+    public String getColor()   {return color;}
+    public int getGrams()      {return grams;}
 
     public abstract String getType();
 

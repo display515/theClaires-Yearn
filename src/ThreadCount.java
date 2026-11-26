@@ -39,6 +39,7 @@ public class ThreadCount {
                 System.out.println("Invalid input. Please choose between 1-4 and try again.");
             } catch (InputMismatchException e){
                 System.out.println("Invalid input. Please input only numbers between 1-4 and try again.");
+                scanner.nextLine();
             } catch (NoSuchElementException e){
                 return 4;
             }
