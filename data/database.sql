@@ -61,14 +61,16 @@ CREATE TABLE yarn_projects(
     name TEXT NOT NULL,
     amount_yarn INTEGER NOT NULL,
     user_id INTEGER NOT NULL,
+    description TEXT,
+    status TEXT CHECK (status IN ('in progress', 'completed')) DEFAULT 'in progress',
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
-INSERT INTO yarn_projects (name, amount_yarn, user_id) VALUES 
-('Cozy Blanket', 550, 1),
-('Summer Scarf', 100, 1),
-('Winter Hat', 150, 4),
-('Spring Shawl',200, 4);
+INSERT INTO yarn_projects (name, amount_yarn, user_id, description, status) VALUES 
+('Cozy Blanket', 550, 1, 'A warm and cozy blanket for cold nights', 'in progress'),
+('Summer Scarf', 100, 1, 'A light and breezy scarf for summer days', 'in progress'),
+('Winter Hat', 150, 4, 'A snug hat for winter warmth', 'in progress'),
+('Spring Shawl', 200, 4, 'A beautiful shawl for spring outings', 'in progress');
 
 SELECT * FROM yarn_projects;
 
@@ -94,14 +96,16 @@ CREATE TABLE beads_projects(
     name TEXT NOT NULL,
     amount_bead INTEGER NOT NULL,
     user_id INTEGER NOT NULL,
+    description TEXT,
+    status TEXT CHECK (status IN ('in progress', 'completed')) DEFAULT 'in progress',
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
-INSERT INTO beads_projects (name, amount_bead, user_id) VALUES
-('Spider man head', 50, 2),
-('Kurambit', 75, 2),
-('Cat', 30, 5),
-('Toothless',200, 5);
+INSERT INTO beads_projects (name, amount_bead, user_id, description, status) VALUES
+('Spider man head', 50, 2, 'A colorful head for a Spider-Man costume', 'in progress'),
+('Kurambit', 75, 2, 'A traditional Kurambit weapon', 'in progress'),
+('Cat', 30, 5, 'A cute cat-shaped bead accessory', 'in progress'),
+('Toothless', 200, 5, 'A detailed Toothless dragon model', 'in progress');
 
 SELECT * FROM beads_projects;
 

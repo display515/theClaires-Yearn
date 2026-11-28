@@ -31,6 +31,14 @@ public class Yearn_Console{
             }
         }
 
+        Database db = new Database(url);
+        UserInventoryDAO inventoryDAO = new UserInventoryDAO(db);
+        UserCraftsDAO craftsDAO = new UserCraftsDAO(db);
+        YarnProjectsDAO yarnProjectsDAO = new YarnProjectsDAO(db);
+        BeadsProjectsDAO beadsProjectsDAO = new BeadsProjectsDAO(db);
+
+        
+
         public static void main(String[] args) {
             Boolean statementIsTrue = true;
 

@@ -12,8 +12,8 @@ public class YarnProjectsDAO {
         this.db = db;
     }
 
-    public List<Material> getAllByUser(int userId) {
-        List<Material> list = new ArrayList<>();
+    public List<Project> getAllByUser(int userId) {
+        List<Project> list = new ArrayList<>();
         String sql = "SELECT * FROM yarn_projects WHERE user_id = ?";
 
         try (Connection conn = db.connect();
@@ -21,11 +21,12 @@ public class YarnProjectsDAO {
             ps.setInt(1, userId);
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
-                    list.add(new Material(
+                    list.add(new Project(
                         rs.getInt("id"),
+                        rs.getInt("user_id"),
                         rs.getString("name"),
-                        rs.getInt("amount_yarn"),
-                        rs.getInt("user_id")
+                        rs.getString("description"),
+                        ProjectStatus.valueOf(rs.getString("status"))
                     ));
                 }
             }

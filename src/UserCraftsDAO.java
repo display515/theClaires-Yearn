@@ -6,15 +6,15 @@ public class UserCraftsDAO {
     private final Database db;
     public UserCraftsDAO(Database db) { this.db = db; }
 
-    public List<UserCraft> getAllByUser(int userId) {
-        List<UserCraft> list = new ArrayList<>();
+    public List<String> getAllByUser(int userId) {
+        List<String> list = new ArrayList<>();
         String sql = "SELECT * FROM user_crafts WHERE user_id = ?";
         try (Connection conn = db.connect();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, userId);
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
-                    list.add(new UserCraft(rs.getInt("user_id"), rs.getString("craft")));
+                    list.add(rs.getString("craft"));
                 }
             }
         } catch (SQLException e) {
